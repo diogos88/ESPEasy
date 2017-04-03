@@ -128,7 +128,7 @@
 
 // R108 07-06-2016
 // Support for MS5611 temp/baro sensor (contributed by Battika)
-// Support PWM fade (contributed by qubeck). 
+// Support PWM fade (contributed by qubeck).
 //	Use only for small fade times as it's a blocking function!
 
 // R107 21-05-2016

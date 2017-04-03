@@ -34,7 +34,7 @@ boolean CPlugin_008(byte function, struct EventStruct *event, String& string)
         strcpy_P(Settings.MQTTpublish, PSTR("demo.php?name=%sysname%&task=%tskname%&valuename=%valname%&value=%value%"));
         break;
       }
-      
+
     case CPLUGIN_PROTOCOL_SEND:
       {
         byte valueCount = getValueCountFromSensorType(event->sensorType);
@@ -118,7 +118,7 @@ boolean HTTPSend(struct EventStruct *event, byte varIndex, float value, unsigned
 
   // This will send the request to the server
   client.print(String("GET ") + url + " HTTP/1.1\r\n" +
-               "Host: " + hostName + "\r\n" + authHeader + 
+               "Host: " + hostName + "\r\n" + authHeader +
                "Connection: close\r\n\r\n");
 
   unsigned long timer = millis() + 200;

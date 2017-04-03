@@ -125,7 +125,7 @@ byte CPluginCall(byte Function, struct EventStruct *event)
 
  if (event == 0)
     event=&TempEvent;
-    
+
   switch (Function)
   {
     // Unconditional calls to all plugins

@@ -49,7 +49,7 @@ boolean Plugin_013(byte function, struct EventStruct *event, String& string)
         strcpy_P(ExtraTaskSettings.TaskDeviceValueNames[0], PSTR(PLUGIN_VALUENAME1_013));
         break;
       }
-    
+
 
     case PLUGIN_WEBFORM_LOAD:
       {

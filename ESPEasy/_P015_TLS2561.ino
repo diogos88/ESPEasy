@@ -194,13 +194,13 @@ boolean Plugin_015_tls2561_begin(uint8_t integration)
   uint8_t ret;
 
   // Power UP device
-  ret = Plugin_015_tsl2561_writeRegister(TSL2561_CONTROL, TSL2561_POWER_UP); 
+  ret = Plugin_015_tsl2561_writeRegister(TSL2561_CONTROL, TSL2561_POWER_UP);
   if ( ret == 0 )
   {
     // I noticed 1st calculation after power up could be hazardous; so
     // do a 1st dummy reading, with speed integration time, here 13ms
-    Plugin_015_tsl2561_writeRegister(TSL2561_TIMING, TSL2561_TIMING_13MS);  
-    delay(15);  
+    Plugin_015_tsl2561_writeRegister(TSL2561_TIMING, TSL2561_TIMING_13MS);
+    delay(15);
     ret = true;
   } else {
     String log = F("TLS2561 : integration=0x");
@@ -211,7 +211,7 @@ boolean Plugin_015_tls2561_begin(uint8_t integration)
     ret = false;
   }
 
-  return ret; 
+  return ret;
 }
 
 /* ======================================================================
@@ -225,7 +225,7 @@ Comments: -
 uint8_t Plugin_015_tsl2561_readRegister(uint8_t reg, uint8_t * value)
 {
   Wire.beginTransmission(TSL2561_I2C_ADDRESS);
-  Wire.write(reg);         
+  Wire.write(reg);
   // all was fine ?
   if ( Wire.endTransmission()==0 ) {
     // request 1 byte and have it ?
@@ -249,15 +249,15 @@ uint8_t Plugin_015_tsl2561_writeRegister(uint8_t reg, uint8_t value)
 {
   Wire.beginTransmission(TSL2561_I2C_ADDRESS);
   Wire.write(reg);
-  Wire.write(value); 
-  return (Wire.endTransmission()); 
+  Wire.write(value);
+  return (Wire.endTransmission());
 }
 
 /* ======================================================================
 Function: Plugin_015_tsl2561_calcLux
 Purpose : start a conversion and return calculated lux
 Input   : integration time
-Output  : 0 if calculated value ok and updated 
+Output  : 0 if calculated value ok and updated
 Comments: global lux value is updated
 ====================================================================== */
 int8_t Plugin_015_tsl2561_calcLux(uint8_t integration)
@@ -272,8 +272,8 @@ int8_t Plugin_015_tsl2561_calcLux(uint8_t integration)
   uint8_t msb, lsb;
   uint8_t err = 0;
 
-  // do start calculation with speed integration time, 
-  Plugin_015_tsl2561_writeRegister(TSL2561_TIMING, integration);  
+  // do start calculation with speed integration time,
+  Plugin_015_tsl2561_writeRegister(TSL2561_TIMING, integration);
   if (integration == TSL2561_TIMING_402MS ) {
     chScale = TSL2561_CHSCALE_TINT_402MS ;
     clipThreshold = TSL2561_CLIPPING_402MS ;
@@ -299,7 +299,7 @@ int8_t Plugin_015_tsl2561_calcLux(uint8_t integration)
 
   // I2C error ?
   if( err )
-    return -2; 
+    return -2;
 
   /* Sensor saturated the lux is not valid in this situation */
   if ((ch0 > clipThreshold) || (ch1 > clipThreshold))
@@ -309,15 +309,15 @@ int8_t Plugin_015_tsl2561_calcLux(uint8_t integration)
 
   // gain is 1 so put it to 16X
   chScale <<= 4;
-  
+
   // scale the channel values
   channel0 = (ch0 * chScale) >> TSL2561_CH_SCALE;
   channel1 = (ch1 * chScale) >> TSL2561_CH_SCALE;
 
   ratio1 = 0;
-  if (channel0!= 0) 
+  if (channel0!= 0)
     ratio1 = (channel1 << (TSL2561_RATIO_SCALE+1))/channel0;
-  
+
   // round the ratio value
   ratio = (ratio1 + 1) >> 1;
 
@@ -342,14 +342,14 @@ int8_t Plugin_015_tsl2561_calcLux(uint8_t integration)
 
   // datasheet formula
   lux=((channel0*b)-(channel1*m));
-  
+
   // do not allow negative lux value
-  if(lux<0) 
+  if(lux<0)
     lux=0;
-  
+
   // round lsb (2^(LUX_SCALE−1))
   lux += (1<<(TSL2561_LUX_SCALE-1));
-  
+
   // strip off fractional portion
   lux >>= TSL2561_LUX_SCALE;
 

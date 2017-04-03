@@ -162,7 +162,7 @@ void ExecuteCommand(byte source, const char *Line)
       MQTTclient.publish(topic.c_str(), value.c_str(),Settings.MQTTRetainFlag);
     }
   }
-  
+
   if (strcasecmp_P(Command, PSTR("SendToUDP")) == 0)
   {
     success = true;
@@ -261,19 +261,19 @@ void ExecuteCommand(byte source, const char *Line)
     success = true;
     WifiScan();
   }
-  
+
   if (strcasecmp_P(Command, PSTR("WifiConnect")) == 0)
   {
     success = true;
     WifiConnect(1);
   }
-  
+
   if (strcasecmp_P(Command, PSTR("WifiDisconnect")) == 0)
   {
     success = true;
     WifiDisconnect();
   }
-  
+
   if (strcasecmp_P(Command, PSTR("Reboot")) == 0)
   {
     success = true;
@@ -377,10 +377,10 @@ void ExecuteCommand(byte source, const char *Line)
   }
 
   yield();
-  
+
   if (success)
     status += F("\nOk");
-  else  
+  else
     status += F("\nUnknown command!");
   SendStatus(source,status);
   yield();

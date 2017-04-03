@@ -132,7 +132,7 @@ boolean Plugin_005(byte function, struct EventStruct *event, String& string)
               {
                 float temperature = NAN;
                 float humidity = NAN;
-                
+
                 if (Par3 == 11)
                 {
                   temperature = float(dht_dat[2]); // Temperature

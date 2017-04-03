@@ -29,7 +29,7 @@ boolean Plugin_021(byte function, struct EventStruct *event, String& string)
         Device[deviceCount].TimerOption = false;
         break;
       }
-      
+
     case PLUGIN_GET_DEVICENAME:
       {
         string = F(PLUGIN_NAME_021);
@@ -41,7 +41,7 @@ boolean Plugin_021(byte function, struct EventStruct *event, String& string)
         strcpy_P(ExtraTaskSettings.TaskDeviceValueNames[0], PSTR(PLUGIN_VALUENAME1_021));
         break;
       }
-      
+
     case PLUGIN_WEBFORM_LOAD:
       {
         char tmpString[128];

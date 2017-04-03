@@ -40,7 +40,7 @@ boolean Plugin_002(byte function, struct EventStruct *event, String& string)
         strcpy_P(ExtraTaskSettings.TaskDeviceValueNames[0], PSTR(PLUGIN_VALUENAME1_002));
         break;
       }
-      
+
     case PLUGIN_READ:
       {
         int value = analogRead(A0);

@@ -75,7 +75,7 @@ boolean Plugin_026(byte function, struct EventStruct *event, String& string)
         success = true;
         break;
       }
-      
+
     case PLUGIN_READ:
       {
         float value = 0;

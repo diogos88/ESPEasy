@@ -100,7 +100,7 @@ boolean Plugin_006(byte function, struct EventStruct *event, String& string)
 #define BMP085_ULTRAHIGHRES         3
 #define BMP085_CAL_AC1           0xAA  // R   Calibration data (16 bits)
 #define BMP085_CAL_AC2           0xAC  // R   Calibration data (16 bits)
-#define BMP085_CAL_AC3           0xAE  // R   Calibration data (16 bits)    
+#define BMP085_CAL_AC3           0xAE  // R   Calibration data (16 bits)
 #define BMP085_CAL_AC4           0xB0  // R   Calibration data (16 bits)
 #define BMP085_CAL_AC5           0xB2  // R   Calibration data (16 bits)
 #define BMP085_CAL_AC6           0xB4  // R   Calibration data (16 bits)

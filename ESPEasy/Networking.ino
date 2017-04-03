@@ -336,7 +336,7 @@ void sendSysInfoUDP(byte repeats)
   // 1 byte unit
   // 2 byte build
   // 25 char name
-  
+
   // send my info to the world...
   strcpy_P(log, PSTR("UDP  : Send Sysinfo message"));
   addLog(LOG_LEVEL_DEBUG_MORE, log);

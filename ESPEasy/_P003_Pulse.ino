@@ -70,7 +70,7 @@ boolean Plugin_003(byte function, struct EventStruct *event, String& string)
         String options[3];
         options[0] = F("Delta");
         options[1] = F("Delta/Total/Time");
-        options[2] = F("Total");        
+        options[2] = F("Total");
         int optionValues[3];
         optionValues[0] = 0;
         optionValues[1] = 1;
@@ -91,7 +91,7 @@ boolean Plugin_003(byte function, struct EventStruct *event, String& string)
 
         if (choice !=0)
           string += F("<span style=\"color:red\">Total count is not persistent!</span>");
-          
+
         success = true;
         break;
       }

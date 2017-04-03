@@ -17,7 +17,7 @@ static uint16_t readRegister025(uint8_t i2cAddress, uint8_t reg) {
   Wire.write((0x00));
   Wire.endTransmission();
   Wire.requestFrom(i2cAddress, (uint8_t)2);
-  return ((Wire.read() << 8) | Wire.read());  
+  return ((Wire.read() << 8) | Wire.read());
 }
 
 boolean Plugin_025(byte function, struct EventStruct *event, String& string)
@@ -194,7 +194,7 @@ boolean Plugin_025(byte function, struct EventStruct *event, String& string)
         Wire.write((uint8_t)(config & 0xFF));
         Wire.endTransmission();
         delay(8);
-        UserVar[event->BaseVarIndex] = (float) readRegister025((address), (0x00)) ;  
+        UserVar[event->BaseVarIndex] = (float) readRegister025((address), (0x00)) ;
         String log = F("ADS1115  : Analog value: ");
         log += UserVar[event->BaseVarIndex];
 //        send(msgDust025->set(UserVar[event->BaseVarIndex], 1));  // Mysensors

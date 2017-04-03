@@ -20,7 +20,7 @@ uint16_t readRegister024(uint8_t i2cAddress, uint8_t reg) {
   ret = Wire.read(); // receive DATA
   ret |= Wire.read() << 8; // receive DATA
   uint8_t pec = Wire.read();
-  return ret;  
+  return ret;
 }
 
 float readTemp024(uint8_t i2c_addr, uint8_t i2c_reg)

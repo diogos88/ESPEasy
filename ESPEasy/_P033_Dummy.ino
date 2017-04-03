@@ -90,7 +90,7 @@ boolean Plugin_033(byte function, struct EventStruct *event, String& string)
         success = true;
         break;
       }
-      
+
     case PLUGIN_READ:
       {
         event->sensorType =Settings.TaskDevicePluginConfig[event->TaskIndex][0];

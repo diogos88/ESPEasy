@@ -112,13 +112,13 @@ boolean Plugin_032(byte function, struct EventStruct *event, String& string)
       {
         if (!Plugin_032_init)
         {
-          Plugin_032_init = Plugin_032_begin(Settings.TaskDevicePluginConfig[event->TaskIndex][0]);          
+          Plugin_032_init = Plugin_032_begin(Settings.TaskDevicePluginConfig[event->TaskIndex][0]);
         }
 
         if (Plugin_032_init) {
           Plugin_032_read_prom();
           Plugin_032_readout();
-          
+
           UserVar[event->BaseVarIndex] = ms5611_temperature / 100;
           int elev = Settings.TaskDevicePluginConfig[event->TaskIndex][1];
           if (elev)
@@ -167,9 +167,9 @@ byte Plugin_032_send_cmd(byte aCMD)
 
 //**************************************************************************/
 // Reads the PROM of MS5611
-// There are in total 8 addresses resulting in a total memory of 128 bit. 
-// Address 0 contains factory data and the setup, addresses 1-6 calibration 
-// coefficients and address 7 contains the serial code and CRC. 
+// There are in total 8 addresses resulting in a total memory of 128 bit.
+// Address 0 contains factory data and the setup, addresses 1-6 calibration
+// coefficients and address 7 contains the serial code and CRC.
 // The command sequence is 8 bits long with a 16 bit result which is
 // clocked with the MSB first.
 //**************************************************************************/
@@ -177,7 +177,7 @@ void Plugin_032_read_prom() {
   Plugin_032_send_cmd(MS5xxx_CMD_RESET);
   delay(3);
 
-  for(uint8_t i=0;i<8;i++) 
+  for(uint8_t i=0;i<8;i++)
   {
       ms5611_prom[i]=0x0000;
       Plugin_032_send_cmd(MS5xxx_CMD_PROM_RD+2*i);
@@ -188,7 +188,7 @@ void Plugin_032_read_prom() {
       c = Wire.read();
       ms5611_prom[i] += c;
       Wire.endTransmission(true);
-  }  
+  }
 }
 
 //**************************************************************************/
@@ -198,7 +198,7 @@ unsigned long Plugin_032_read_adc(unsigned char aCMD)
 {
   unsigned long value=0;
   unsigned long c=0;
-  
+
   Plugin_032_send_cmd(MS5xxx_CMD_ADC_CONV+aCMD); // start DAQ and conversion of ADC data
   switch (aCMD & 0x0f)
   {
@@ -222,7 +222,7 @@ unsigned long Plugin_032_read_adc(unsigned char aCMD)
   c = Wire.read();
   value += c;
   Wire.endTransmission(true);
- 
+
   return value;
 }
 
@@ -233,7 +233,7 @@ unsigned long Plugin_032_read_adc(unsigned char aCMD)
 void Plugin_032_readout() {
 
   unsigned long D1=0, D2=0;
-  
+
   double dT;
   double OFF;
   double SENS;
@@ -247,7 +247,7 @@ void Plugin_032_readout() {
   SENS=ms5611_prom[1]*pow(2,15)+dT*ms5611_prom[3]/pow(2,8);
   ms5611_temperature=(2000+(dT*ms5611_prom[6])/pow(2,23));
   ms5611_pressure=(((D1*SENS)/pow(2,21)-OFF)/pow(2,15));
-   
+
   // perform higher order corrections
   double T2=0., OFF2=0., SENS2=0.;
   if(ms5611_temperature<2000) {
@@ -259,11 +259,11 @@ void Plugin_032_readout() {
       SENS2+=11*(ms5611_temperature+1500)*(ms5611_temperature+1500)/pow(2,1);
     }
   }
-    
+
   ms5611_temperature-=T2;
   OFF-=OFF2;
   SENS-=SENS2;
-  ms5611_pressure=(((D1*SENS)/pow(2,21)-OFF)/pow(2,15));  
+  ms5611_pressure=(((D1*SENS)/pow(2,21)-OFF)/pow(2,15));
 }
 
 //**************************************************************************/

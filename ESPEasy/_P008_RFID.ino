@@ -52,7 +52,7 @@ boolean Plugin_008(byte function, struct EventStruct *event, String& string)
         strcpy_P(ExtraTaskSettings.TaskDeviceValueNames[0], PSTR(PLUGIN_VALUENAME1_008));
         break;
       }
-      
+
     case PLUGIN_INIT:
       {
         Plugin_008_init = true;

@@ -27,7 +27,7 @@ boolean CPlugin_004(byte function, struct EventStruct *event, String& string)
         string = F(CPLUGIN_NAME_004);
         break;
       }
-      
+
     case CPLUGIN_PROTOCOL_SEND:
       {
         char log[80];

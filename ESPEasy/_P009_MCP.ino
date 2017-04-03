@@ -113,7 +113,7 @@ boolean Plugin_009(byte function, struct EventStruct *event, String& string)
         success = true;
         break;
       }
-      
+
     case PLUGIN_WRITE:
       {
         String log = "";

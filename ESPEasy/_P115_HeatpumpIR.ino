@@ -10,14 +10,14 @@
  * ESPEasy plugin to send air conditioner / heatpump IR signals
  * * Use the device type 'Heatpump IR transmitter' as the device type in Devices -> Edit
  * * Connect and IR LED + series resistor between the GPIO pin configured for this device and ground
- * 
+ *
  * Send commands through http, like this example (assuming the IP address of the ESP node is 192.168.0.61):
  * * curl http://192.168.0.61/control?cmd=heatpumpir,panasonic_ckp,1,1,0,22,0,0
- * 
+ *
  * Send commands through OpenHAB MQTT with Mosquitto, like this example,
  * assuming the 'Name' of the ESP node in ESPEasy Main Settings page is 'newdevice')
  * * mosquitto_pub -t /newdevice/cmd -m heatpumpir,panasonic_ckp,1,1,0,22,0,0
- * 
+ *
  * The parameters are (in this order)
  * * The type of the heatpump as a string, see the implementations of different models, like https://github.com/ToniA/arduino-heatpumpir/blob/master/MitsubishiHeatpumpIR.cpp
  * * power state (see https://github.com/ToniA/arduino-heatpumpir/blob/master/HeatpumpIR.h for modes)
@@ -26,9 +26,9 @@
  * * temperature
  * * vertical air direction
  * * horizontal air direction
- * 
+ *
  * See the HeatpumpIR library for further information: https://github.com/ToniA/arduino-heatpumpir
- * 
+ *
  */
 
 #include <FujitsuHeatpumpIR.h>
